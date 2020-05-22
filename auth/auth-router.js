@@ -20,8 +20,7 @@ router.post("/register", async (req, res, next) => {
     }
     res.status(201).json(user);
   } catch (err) {
-    console.log("/register", err);
-    next(err);
+    // next(err);
   }
 });
 
