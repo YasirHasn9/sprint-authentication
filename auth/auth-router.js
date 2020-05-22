@@ -34,7 +34,15 @@ router.post("/login", async (req, res, next) => {
     const { username, password } = req.body;
     const user = await Users.findBy({ username });
     if (user && bcrypt.compareSync(password, user.password)) {
-      return res.status(201).json({ message: `welcome ${user.username}` });
+      const payload = {
+        user: user.id,
+        username: user.username
+      };
+      const secret = process.env.TOKEN_SECRET || "it's just a secret";
+      const token = jwt.sign(payload, secret);
+      return res
+        .status(201)
+        .json({ message: `welcome ${user.username}`, token });
     } else {
       return res.status(401).json(authError);
     }
