@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const Users = require("../users/users-models")
 router.post("/register",async  (req, res , next) => {
   // implement registration
   const authError = {
@@ -10,7 +11,9 @@ router.post("/register",async  (req, res , next) => {
      const rounds = process.env.ROUNDS_HASH || 12
      const hash = bcrypt.hashSync(credentials.password , rounds)
      credentials.password = hash
-     
+
+    
+
   } catch(err){
     throw err
   }

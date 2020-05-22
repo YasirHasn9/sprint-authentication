@@ -8,9 +8,9 @@ function find() {
   return db("users");
 }
 
-async function add(filter) {
+async function add(user) {
   try {
-    const [id] = await db("users").insert(add);
+    const [id] = await db("users").insert(user);
     return db("users")
       .where({ id })
       .first();
@@ -19,3 +19,5 @@ async function add(filter) {
     throw err;
   }
 }
+
+
