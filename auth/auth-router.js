@@ -40,6 +40,7 @@ router.post("/login", async (req, res, next) => {
       };
       const secret = process.env.TOKEN_SECRET || "it's just a secret";
       const token = jwt.sign(payload, secret);
+      res.cookie("token", token);
       return res
         .status(201)
         .json({ message: `welcome ${user.username}`, token });
