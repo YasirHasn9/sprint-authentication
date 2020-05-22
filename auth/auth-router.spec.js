@@ -13,4 +13,11 @@ describe("auth router", () => {
     const res = await Users.find();
     expect(res.length).toBeGreaterThanOrEqual(0);
   });
+
+  it("POST /register", async () => {
+    const user = { username: "Yasir", password: "yasir" };
+    const res = await supertest(server)
+      .post("/api/auth/register")
+      .send(user);
+  });
 });
