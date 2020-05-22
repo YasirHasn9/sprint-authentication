@@ -19,5 +19,8 @@ async function add(user) {
     throw err;
   }
 }
-
-
+async function findBy(filter) {
+  return db("users")
+    .where(filter)
+    .first();
+}
