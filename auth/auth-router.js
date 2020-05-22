@@ -31,7 +31,7 @@ router.post("/login", async (req, res, next) => {
   };
   try {
     const { username, password } = req.body;
-    const user = await Users.findBy({ username });
+    const user = await Users.findBy({ username })
     if (user && bcrypt.compareSync(password, user.password)) {
       const payload = {
         user: user.id,

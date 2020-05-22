@@ -19,5 +19,31 @@ describe("auth router", () => {
     const res = await supertest(server)
       .post("/api/auth/register")
       .send(user);
+      if(res.body){
+          return  expect(res.status).toBe(201)
+      } else {
+        return  expect(res.status).toBe(401)
+      }
   });
+
+  it("POST /login", async () => {
+    // let hash = bcrypt.hash("GuessWhat?", 14)
+    const res = await supertest(server)
+      .post("/api/auth/login")
+      .send({ username: "Yasir", password: "yasir?" });
+      
+     if(res.body.message = "Invalid Credentials"){
+         return expect(res.status).toBe(401)
+     } else {
+         return expect(res.status).toBe(201)
+     }
+    expect(res.type).toBe("application/json");
+  });
+  test("login", async () => {
+    const res = await supertest(server)
+        .post("/api/auth/login")
+        .send({ username: "Yasir", password: "yasir!"})
+    expect(res.status).toBe(401)
+    expect(res.body.message).toBe("Invalid Credentials")
+})
 });
